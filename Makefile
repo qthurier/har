@@ -40,7 +40,7 @@ download-data:
 
 ## train
 train: $(venv) data
-	rm -rf artefacts
+	rm -rf keras_artefacts
 	$(venv)/bin/python3 src/train.py
 
 ## evaluate

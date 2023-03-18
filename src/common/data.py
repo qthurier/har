@@ -32,7 +32,13 @@ def _keep_subjects(subjects: list[int]) -> Callable:
 # - add test for format
 # - add test for split
 def make_labelled_dataset(
-    feat_folder, labels_file, subjects_file, batch_size, buffer_size, subjects_to_keep
+    feat_folder,
+    labels_file,
+    subjects_file,
+    batch_size,
+    buffer_size,
+    subjects_to_keep,
+    seed,
 ):
     univariate_ts = _parse_folder(_parse_raw_ts_file, feat_folder)
     multivariate_ts = tf.data.Dataset.zip(univariate_ts).map(
@@ -48,6 +54,10 @@ def make_labelled_dataset(
         tf.data.Dataset.zip((multivariate_ts, labels, subjects))
         .filter(_keep_subjects(subjects_to_keep))
         .map(lambda ts, label, _: (ts, label))
-        .shuffle(buffer_size)
+        .shuffle(buffer_size, seed=seed)
         .batch(batch_size)
     )
+
+
+def get_subjects(file: str) -> set[int]:
+    return set(int(s) for s in Path(file).read_text().split())

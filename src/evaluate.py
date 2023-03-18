@@ -1,26 +1,17 @@
-from pathlib import Path
-
 import tensorflow as tf
 import tomli
 
-from common.data import make_labelled_dataset
+from common.data import get_subjects, make_labelled_dataset
 
 
 def main():
-    model = tf.keras.models.load_model("model")
-
     with open("config.toml", "rb") as f:
         conf = tomli.load(f)
 
-    subjects = set(
-        int(s) for s in Path(conf["data"]["test_subjects_file"]).read_text().split()
-    )
-
+    model = tf.keras.models.load_model(conf["artefacts"]["deep_learning_model"])
+    subjects = get_subjects(conf["data"]["test"]["subject_file"])
     test_set = make_labelled_dataset(
-        conf["data"]["test_feat_folder"],
-        conf["data"]["test_labels_file"],
-        conf["data"]["test_subjects_file"],
-        subjects_to_keep=list(subjects),
+        subjects_to_keep=list(subjects) ** conf["data"]["test"],
         **conf["make_labelled_dataset"]
     )
 
