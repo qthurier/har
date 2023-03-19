@@ -7,28 +7,27 @@ small_kernel_size = 5
 large_kernel_size = 50
 n_classes = 6
 
-[make_labelled_dataset]
-batch_size = 8
-buffer_size = 5_000
-seed = 123
-
 [data]
-n_validation_subjects = 5
-seed = 123
 
 [data.train]
 feat_folder = 'data/UCI HAR Dataset/train/Inertial Signals'
 labels_file = 'data/UCI HAR Dataset/train/y_train.txt'
 subjects_file = 'data/UCI HAR Dataset/train/subject_train.txt'
+seed = 123
+buffer_size = 7_352
+n_validation_subjects = 5
+batch_size = 8
 
 [data.test]
 feat_folder = 'data/UCI HAR Dataset/test/Inertial Signals'
 labels_file = 'data/UCI HAR Dataset/test/y_test.txt'
 subjects_file = 'data/UCI HAR Dataset/test/subject_test.txt'
+labels_desc_file = 'data/UCI HAR Dataset/activity_labels.txt'
+batch_size = 8
 
 [artefacts]
-deep_learning_model = 'keras_artefacts'
+model = 'keras_artefacts'
 
 [training]
-max_epochs = 50
+max_epochs = 1
 patience = 2

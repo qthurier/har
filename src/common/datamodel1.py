@@ -1,7 +1,6 @@
 from functools import partial
 from pathlib import Path
-from typing import Callable
-
+from typing import Callable, Optional, Any
 import tensorflow as tf
 
 
@@ -32,14 +31,18 @@ def _keep_subjects(subjects: list[int]) -> Callable:
 # - add test for format
 # - add test for split
 def make_labelled_dataset(
-    feat_folder,
-    labels_file,
-    subjects_file,
-    batch_size,
-    buffer_size,
-    subjects_to_keep,
-    seed,
+    feat_folder: str,
+    labels_file: str,
+    subjects_file: str,
+    batch_size: int,
+    seed: Optional[int]=None,
+    buffer_size: Optional[int]=None,
+    subjects_to_keep: Optional[list[int]]=None,
+    **kwargs: Any
 ):
+    if seed and not buffer_size:
+        raise ValueError('The parameter buffer_size is required for shuffling the dataset.')
+
     univariate_ts = _parse_folder(_parse_raw_ts_file, feat_folder)
     multivariate_ts = tf.data.Dataset.zip(univariate_ts).map(
         lambda *t: tf.stack(t, axis=-1)
@@ -50,14 +53,23 @@ def make_labelled_dataset(
     subjects = tf.data.experimental.CsvDataset(
         subjects_file, record_defaults=[tf.int32]
     )
-    return (
-        tf.data.Dataset.zip((multivariate_ts, labels, subjects))
-        .filter(_keep_subjects(subjects_to_keep))
-        .map(lambda ts, label, _: (ts, label))
-        .shuffle(buffer_size, seed=seed)
-        .batch(batch_size)
-    )
 
+    dataset = tf.data.Dataset.zip((multivariate_ts, labels, subjects))
+
+    if subjects_to_keep:
+        dataset = dataset.filter(_keep_subjects(subjects_to_keep))
+
+    dataset = dataset.map(lambda ts, label, _: (ts, label))
+
+    if seed:
+        dataset = dataset.shuffle(buffer_size, seed=seed)
+
+    return dataset.batch(batch_size)
+
+
+def get_labels(labelled_dataset: tf.data.Dataset) -> list[int]:
+    labels = labelled_dataset.flat_map(lambda *x: tf.data.Dataset.from_tensor_slices(x[-1])).as_numpy_iterator()
+    return list(labels)
 
 def get_subjects(file: str) -> set[int]:
     return set(int(s) for s in Path(file).read_text().split())

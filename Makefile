@@ -39,11 +39,21 @@ download-data:
 	rm uci.zip
 
 ## train
-train: $(venv) data
+train-dl-model: $(venv) data
 	rm -rf keras_artefacts
-	$(venv)/bin/python3 src/train.py
+	$(venv)/bin/python3 src/train.py deep-learning
+
+## train
+train-non-dl-model: $(venv) data
+	rm -rf sklearn_artefacts
+	mkdir sklearn_artefacts
+	$(venv)/bin/python3 src/train.py non-deep-learning
 
 ## evaluate
-evaluate: $(venv) keras_artefacts
-	$(venv)/bin/python3 src/evaluate.py
+evaluate-dl-model: $(venv) keras_artefacts
+	$(venv)/bin/python3 src/evaluate.py deep-learning
+
+## evaluate
+evaluate-non-dl-model: $(venv) sklearn_artefacts
+	$(venv)/bin/python3 src/evaluate.py non-deep-learning
 

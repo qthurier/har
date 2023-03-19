@@ -1,0 +1,162 @@
+[Classifier]
+n_feat = 9
+feat_block_size = 3
+encoder_dim = 64
+dense_dim = 32
+small_kernel_size = 5
+large_kernel_size = 50
+n_classes = 6
+
+[data]
+
+[data.train]
+feat_file = 'data/UCI HAR Dataset/train/X_train.txt'
+labels_file = 'data/UCI HAR Dataset/train/y_train.txt'
+headers_file = 'data/UCI HAR Dataset/features.txt'
+seed = 123
+
+[data.test]
+feat_file = 'data/UCI HAR Dataset/test/X_test.txt'
+labels_file = 'data/UCI HAR Dataset/test/y_test.txt'
+headers_file = 'data/UCI HAR Dataset/features.txt'
+labels_desc_file = 'data/UCI HAR Dataset/activity_labels.txt'
+
+[artefacts]
+model = 'sklearn_artefacts/model.joblib'
+
+[features]
+base = [
+    "16 tBodyAcc-sma()",
+    "56 tGravityAcc-sma()",
+    "96 tBodyAccJerk-sma()",
+    "136 tBodyGyro-sma()",
+    "176 tBodyGyroJerk-sma()",
+    "201 tBodyAccMag-mean()",
+    "202 tBodyAccMag-std()",
+    "203 tBodyAccMag-mad()",
+    "204 tBodyAccMag-max()",
+    "205 tBodyAccMag-min()",
+    "206 tBodyAccMag-sma()",
+    "207 tBodyAccMag-energy()",
+    "208 tBodyAccMag-iqr()",
+    "209 tBodyAccMag-entropy()",
+    "210 tBodyAccMag-arCoeff()1",
+    "211 tBodyAccMag-arCoeff()2",
+    "212 tBodyAccMag-arCoeff()3",
+    "213 tBodyAccMag-arCoeff()4",
+    "214 tGravityAccMag-mean()",
+    "215 tGravityAccMag-std()",
+    "216 tGravityAccMag-mad()",
+    "217 tGravityAccMag-max()",
+    "218 tGravityAccMag-min()",
+    "219 tGravityAccMag-sma()",
+    "220 tGravityAccMag-energy()",
+    "221 tGravityAccMag-iqr()",
+    "222 tGravityAccMag-entropy()",
+    "223 tGravityAccMag-arCoeff()1",
+    "224 tGravityAccMag-arCoeff()2",
+    "225 tGravityAccMag-arCoeff()3",
+    "226 tGravityAccMag-arCoeff()4",
+    "227 tBodyAccJerkMag-mean()",
+    "228 tBodyAccJerkMag-std()",
+    "229 tBodyAccJerkMag-mad()",
+    "230 tBodyAccJerkMag-max()",
+    "231 tBodyAccJerkMag-min()",
+    "232 tBodyAccJerkMag-sma()",
+    "233 tBodyAccJerkMag-energy()",
+    "234 tBodyAccJerkMag-iqr()",
+    "235 tBodyAccJerkMag-entropy()",
+    "236 tBodyAccJerkMag-arCoeff()1",
+    "237 tBodyAccJerkMag-arCoeff()2",
+    "238 tBodyAccJerkMag-arCoeff()3",
+    "239 tBodyAccJerkMag-arCoeff()4",
+    "240 tBodyGyroMag-mean()",
+    "241 tBodyGyroMag-std()",
+    "242 tBodyGyroMag-mad()",
+    "243 tBodyGyroMag-max()",
+    "244 tBodyGyroMag-min()",
+    "245 tBodyGyroMag-sma()",
+    "246 tBodyGyroMag-energy()",
+    "247 tBodyGyroMag-iqr()",
+    "248 tBodyGyroMag-entropy()",
+    "249 tBodyGyroMag-arCoeff()1",
+    "250 tBodyGyroMag-arCoeff()2",
+    "251 tBodyGyroMag-arCoeff()3",
+    "252 tBodyGyroMag-arCoeff()4",
+    "253 tBodyGyroJerkMag-mean()",
+    "254 tBodyGyroJerkMag-std()",
+    "255 tBodyGyroJerkMag-mad()",
+    "256 tBodyGyroJerkMag-max()",
+    "257 tBodyGyroJerkMag-min()",
+    "258 tBodyGyroJerkMag-sma()",
+    "259 tBodyGyroJerkMag-energy()",
+    "260 tBodyGyroJerkMag-iqr()",
+    "261 tBodyGyroJerkMag-entropy()",
+    "262 tBodyGyroJerkMag-arCoeff()1",
+    "263 tBodyGyroJerkMag-arCoeff()2",
+    "264 tBodyGyroJerkMag-arCoeff()3",
+    "265 tBodyGyroJerkMag-arCoeff()4",
+    "281 fBodyAcc-sma()",
+    "360 fBodyAccJerk-sma()",
+    "439 fBodyGyro-sma()",
+    "503 fBodyAccMag-mean()",
+    "504 fBodyAccMag-std()",
+    "505 fBodyAccMag-mad()",
+    "506 fBodyAccMag-max()",
+    "507 fBodyAccMag-min()",
+    "508 fBodyAccMag-sma()",
+    "509 fBodyAccMag-energy()",
+    "510 fBodyAccMag-iqr()",
+    "511 fBodyAccMag-entropy()",
+    "512 fBodyAccMag-maxInds",
+    "513 fBodyAccMag-meanFreq()",
+    "514 fBodyAccMag-skewness()",
+    "515 fBodyAccMag-kurtosis()",
+    "516 fBodyBodyAccJerkMag-mean()",
+    "517 fBodyBodyAccJerkMag-std()",
+    "518 fBodyBodyAccJerkMag-mad()",
+    "519 fBodyBodyAccJerkMag-max()",
+    "520 fBodyBodyAccJerkMag-min()",
+    "521 fBodyBodyAccJerkMag-sma()",
+    "522 fBodyBodyAccJerkMag-energy()",
+    "523 fBodyBodyAccJerkMag-iqr()",
+    "524 fBodyBodyAccJerkMag-entropy()",
+    "525 fBodyBodyAccJerkMag-maxInds",
+    "526 fBodyBodyAccJerkMag-meanFreq()",
+    "527 fBodyBodyAccJerkMag-skewness()",
+    "528 fBodyBodyAccJerkMag-kurtosis()",
+    "529 fBodyBodyGyroMag-mean()",
+    "530 fBodyBodyGyroMag-std()",
+    "531 fBodyBodyGyroMag-mad()",
+    "532 fBodyBodyGyroMag-max()",
+    "533 fBodyBodyGyroMag-min()",
+    "534 fBodyBodyGyroMag-sma()",
+    "535 fBodyBodyGyroMag-energy()",
+    "536 fBodyBodyGyroMag-iqr()",
+    "537 fBodyBodyGyroMag-entropy()",
+    "538 fBodyBodyGyroMag-maxInds",
+    "539 fBodyBodyGyroMag-meanFreq()",
+    "540 fBodyBodyGyroMag-skewness()",
+    "541 fBodyBodyGyroMag-kurtosis()",
+    "542 fBodyBodyGyroJerkMag-mean()",
+    "543 fBodyBodyGyroJerkMag-std()",
+    "544 fBodyBodyGyroJerkMag-mad()",
+    "545 fBodyBodyGyroJerkMag-max()",
+    "546 fBodyBodyGyroJerkMag-min()",
+    "547 fBodyBodyGyroJerkMag-sma()",
+    "548 fBodyBodyGyroJerkMag-energy()",
+    "549 fBodyBodyGyroJerkMag-iqr()",
+    "550 fBodyBodyGyroJerkMag-entropy()",
+    "551 fBodyBodyGyroJerkMag-maxInds",
+    "552 fBodyBodyGyroJerkMag-meanFreq()",
+    "553 fBodyBodyGyroJerkMag-skewness()",
+    "554 fBodyBodyGyroJerkMag-kurtosis()",
+    "555 angle(tBodyAccMean,gravity)",
+    "556 angle(tBodyAccJerkMean),gravityMean)",
+    "557 angle(tBodyGyroMean,gravityMean)",
+    "558 angle(tBodyGyroJerkMean,gravityMean)",
+    "559 angle(X,gravityMean)",
+    "560 angle(Y,gravityMean)",
+    "561 angle(Z,gravityMean)"
+]
+
