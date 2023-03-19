@@ -5,7 +5,7 @@
 
 ### Model choice
 sdfsdfs
-
+accuracy
 ## Model 2 (non-deep machine learning model)
 ### Data Preprocessing
 The engineered features being already normalized and bounded within [-1, 1], I haven't performed any additional preprocessing. I did notice that some columns in the training set do not reach the boundaries, which makes me think that it has been preprocessed taking into account the maximum/minimum observed across the training and the test set. I'll look into this after I've submitted this assignment because if that's indeed the case this would be unfortunate given that this is a form of data leakage. [TODO]

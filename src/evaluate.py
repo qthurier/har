@@ -16,6 +16,7 @@ from common.datamodel2 import make_labelled_dataset as make_model2_dataset
 def _pretty_confusion_matrix(
     y: list[int], y_hat: list[int], labels_desc_file: str
 ) -> str:
+    """Turn a confusion matrix into a printable string"""
     labels = convert_text_file_to_list(labels_desc_file)
     labels_mapping = {i: label for i, label in enumerate(labels)}
     true_labels = [labels_mapping[ground_truth] for ground_truth in y]

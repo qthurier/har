@@ -31,3 +31,5 @@ model = 'model1'
 [training]
 max_epochs = 1
 patience = 2
+loss = "sparse_categorical_crossentropy"
+metric = "sparse_categorical_accuracy"

@@ -14,7 +14,7 @@ from model.model1 import Classifier as DeepLearningClassifier
 from model.model2 import Classifier as RandomForestClassifier
 
 
-def train_model1(conf: dict):
+def train_model1(conf: dict) -> None:
     random.seed(conf["data"]["train"]["seed"])
     subjects = get_subjects(conf["data"]["train"]["subjects_file"])
     validation_subjects = random.sample(
@@ -34,9 +34,8 @@ def train_model1(conf: dict):
 
     classifier = DeepLearningClassifier(**conf["Classifier"])
     classifier.compile(
-        optimizer="sgd",
-        loss="sparse_categorical_crossentropy",
-        metrics="sparse_categorical_accuracy",
+        loss=conf["training"]["loss"],
+        metrics=conf["training"]["metric"],
     )
     early_stopping = EarlyStopping(
         monitor="loss", restore_best_weights=True, patience=conf["training"]["patience"]
@@ -51,7 +50,7 @@ def train_model1(conf: dict):
     classifier.save(conf["artefacts"]["model"])
 
 
-def train_model2(conf: dict):
+def train_model2(conf: dict) -> None:
     training_set = make_model2_dataset(**conf["data"]["train"])
     classifier = RandomForestClassifier(
         base_features=conf["features"]["base"],

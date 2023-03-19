@@ -14,12 +14,10 @@ from keras.layers import (
 )
 from keras.models import Sequential
 
-# norm_inputs = Concatenate()([block1, block2, block3]) smooth decrease
-# 0.0978
-# 0.0717
-
 
 class ExtractFeatRange(Layer):
+    """Extract a consecutive range of features"""
+
     def __init__(self, start: int, end: int, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.start = start
@@ -35,13 +33,19 @@ class ExtractFeatRange(Layer):
 
 
 class TimeWiseNormalisation(Layer):
+    """Standardise a tensor across the time axis"""
+
     def call(self, inputs: tf.Tensor) -> tf.Tensor:
-        mu = tf.math.reduce_mean(inputs, axis=-2, keepdims=True)
+        mu = tf.math.reduce_mean(
+            inputs, axis=-2, keepdims=True
+        )  # do not squeeze to allow broadcasting
         sigma = tf.math.reduce_std(inputs, axis=-2, keepdims=True)
         return inputs - mu / sigma
 
 
 class TimeAndFeatWiseNormalisation(Layer):
+    """Standardise a tensor across the time axis, the feature axis and merge both representations"""
+
     def __init__(self, n_feat: int, feat_block_size: int, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.n_feat = n_feat
@@ -69,6 +73,8 @@ class TimeAndFeatWiseNormalisation(Layer):
 
 
 class Classifier(tf.keras.Model):
+    """Output a score distribution for each multivariate time serie input, each score representing the likelihood of an activity"""
+
     def __init__(
         self,
         n_feat,

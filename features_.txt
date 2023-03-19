@@ -142,7 +142,6 @@
 294 fBodyAcc-meanFreq()-X
 295 fBodyAcc-meanFreq()-Y
 296 fBodyAcc-meanFreq()-Z
-
 303 fBodyAcc-bandsEnergy()-1,8
 304 fBodyAcc-bandsEnergy()-9,16
 305 fBodyAcc-bandsEnergy()-17,24
@@ -185,17 +184,12 @@
 342 fBodyAcc-bandsEnergy()-49,64
 343 fBodyAcc-bandsEnergy()-1,24
 344 fBodyAcc-bandsEnergy()-25,48
-
-
-
-
 370 fBodyAccJerk-maxInds-X
 371 fBodyAccJerk-maxInds-Y
 372 fBodyAccJerk-maxInds-Z
 373 fBodyAccJerk-meanFreq()-X
 374 fBodyAccJerk-meanFreq()-Y
 375 fBodyAccJerk-meanFreq()-Z
-
 382 fBodyAccJerk-bandsEnergy()-1,8
 383 fBodyAccJerk-bandsEnergy()-9,16
 384 fBodyAccJerk-bandsEnergy()-17,24
@@ -238,16 +232,12 @@
 421 fBodyAccJerk-bandsEnergy()-49,64
 422 fBodyAccJerk-bandsEnergy()-1,24
 423 fBodyAccJerk-bandsEnergy()-25,48
-
-
-
 449 fBodyGyro-maxInds-X
 450 fBodyGyro-maxInds-Y
 451 fBodyGyro-maxInds-Z
 452 fBodyGyro-meanFreq()-X
 453 fBodyGyro-meanFreq()-Y
 454 fBodyGyro-meanFreq()-Z
-
 461 fBodyGyro-bandsEnergy()-1,8
 462 fBodyGyro-bandsEnergy()-9,16
 463 fBodyGyro-bandsEnergy()-17,24

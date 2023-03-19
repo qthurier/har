@@ -8,6 +8,8 @@ from typing import Any
 
 
 class FeatureSelector(Pipeline):
+    """Extract a block of columns and keep only the most predictive"""
+
     def __init__(
         self,
         block: str,
@@ -42,6 +44,8 @@ class FeatureSelector(Pipeline):
 
 
 class Classifier(Pipeline):
+    """Random forest classifier predicting the likelihod of each activity from pre-engineered features"""
+
     def __init__(
         self,
         base_features,
