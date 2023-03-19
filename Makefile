@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help install clean format eval-model1 eval-model2
+.PHONY: help install clean format eval-model1 eval-model2 labels-distribution
 
 ## display help message
 help:
@@ -35,12 +35,10 @@ data:
 
 ## train deep learning model
 model1: $(venv) data
-	rm -rf model1
 	$(venv)/bin/python3 src/train.py deep-learning
 
 ## train non deep learning model
 model2: $(venv) data
-	rm -rf model2
 	mkdir model2
 	$(venv)/bin/python src/train.py non-deep-learning
 
@@ -51,4 +49,8 @@ eval-model1: $(venv) data model1
 ## evaluate non deep learning model
 eval-model2: $(venv) data model2
 	$(venv)/bin/python src/evaluate.py non-deep-learning
+
+## check activity classes distribution
+labels-distribution: data
+	cat "data/UCI HAR Dataset/train/y_train.txt" | sort | uniq -c
 

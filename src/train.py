@@ -2,14 +2,14 @@ import random
 import sys
 
 import tomli
-from joblib import dump
+import joblib
 from keras.callbacks import EarlyStopping
 
 from common.datamodel1 import make_labelled_dataset as make_model1_dataset
 from common.datamodel1 import get_subjects
 from common.datamodel2 import make_labelled_dataset as make_model2_dataset
-from model.learner import Classifier
-from model.model2 import Classifier as TreeBasedClassifier
+from model.model1 import Classifier as DeepLearningClassifier
+from model.model2 import Classifier as RandomForestClassifier
 
 
 def train_model1(conf: dict):
@@ -30,7 +30,7 @@ def train_model1(conf: dict):
         **conf["data"]["train"],
     )
 
-    classifier = Classifier(**conf["Classifier"])
+    classifier = DeepLearningClassifier(**conf["Classifier"])
     classifier.compile(
         optimizer="sgd",
         loss="sparse_categorical_crossentropy",
@@ -51,26 +51,26 @@ def train_model1(conf: dict):
 
 def train_model2(conf: dict):
     training_set = make_model2_dataset(**conf["data"]["train"])
-    classifier = TreeBasedClassifier(conf["features"]["base"])
+    classifier = RandomForestClassifier(conf["features"]["base"])
     classifier.fit(training_set, training_set.y)
-    dump(classifier, conf["artefacts"]["model"])
+    joblib.dump(classifier, conf["artefacts"]["model"])
 
 
 if __name__ == "__main__":
-    # TODO: check balance
-    if sys.argv[1] == "deep-learning":
-        with open("model1.toml", "rb") as f:
-            conf = tomli.load(f)
+    match sys.argv[1]:
+        case "deep-learning":
+            with open("model1.toml", "rb") as f:
+                conf = tomli.load(f)
 
-        train_model1(conf)
+            train_model1(conf)
 
-    elif sys.argv[1] == "non-deep-learning":
-        with open("model2.toml", "rb") as f:
-            conf = tomli.load(f)
+        case "non-deep-learning":
+            with open("model2.toml", "rb") as f:
+                conf = tomli.load(f)
 
-        train_model2(conf)
+            train_model2(conf)
 
-    else:
-        raise ValueError(
-            'The first parameter for this script should be "deep-learning" or "non-deep-learning".'
-        )
+        case _:
+            raise ValueError(
+                'The first parameter for this script should be "deep-learning" or "non-deep-learning".'
+            )

@@ -27,28 +27,29 @@ def _pretty_confusion_matrix(
 
 
 if __name__ == "__main__":
-    if sys.argv[1] == "deep-learning":
-        with open("model1.toml", "rb") as f:
-            conf = tomli.load(f)
+    match sys.argv[1]:
+        case "deep-learning":
+            with open("model1.toml", "rb") as f:
+                conf = tomli.load(f)
 
-        model = tf.keras.models.load_model(conf["artefacts"]["model"])
-        test_set = make_model1_dataset(**conf["data"]["test"])
-        y = get_labels(test_set)
-        y_hat = np.argmax(model.predict(test_set), axis=-1)
+            model = tf.keras.models.load_model(conf["artefacts"]["model"])
+            test_set = make_model1_dataset(**conf["data"]["test"])
+            y = get_labels(test_set)
+            y_hat = np.argmax(model.predict(test_set), axis=-1)
 
-    elif sys.argv[1] == "non-deep-learning":
-        with open("model2.toml", "rb") as f:
-            conf = tomli.load(f)
+        case "non-deep-learning":
+            with open("model2.toml", "rb") as f:
+                conf = tomli.load(f)
 
-        model = joblib.load(conf["artefacts"]["model"])
-        test_set = make_model2_dataset(**conf["data"]["test"])
-        y = test_set.y
-        y_hat = model.predict(test_set)
+            model = joblib.load(conf["artefacts"]["model"])
+            test_set = make_model2_dataset(**conf["data"]["test"])
+            y = test_set.y
+            y_hat = model.predict(test_set)
 
-    else:
-        raise ValueError(
-            'The first parameter for this script should be "deep-learning" or "non-deep-learning".'
-        )
+        case _:
+            raise ValueError(
+                'The first parameter for this script should be "deep-learning" or "non-deep-learning".'
+            )
 
     accuracy = accuracy_score(y, y_hat)
     conf_matrix_str = _pretty_confusion_matrix(
