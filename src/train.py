@@ -5,14 +5,14 @@ import tomli
 from joblib import dump
 from keras.callbacks import EarlyStopping
 
-from common.data import get_subjects, make_labelled_dataset
+from common.datamodel1 import make_labelled_dataset as make_model1_dataset
+from common.datamodel1 import get_subjects
 from common.datamodel2 import make_labelled_dataset as make_model2_dataset
 from model.learner import Classifier
 from model.model2 import Classifier as TreeBasedClassifier
 
 
 def train_model1(conf: dict):
-
     random.seed(conf["data"]["train"]["seed"])
     subjects = get_subjects(conf["data"]["train"]["subjects_file"])
     validation_subjects = random.sample(
@@ -20,12 +20,12 @@ def train_model1(conf: dict):
     )
     training_subjects = [s for s in subjects if s not in validation_subjects]
 
-    validation_set = make_labelled_dataset(
+    validation_set = make_model1_dataset(
         subjects_to_keep=validation_subjects,
         **conf["data"]["train"],
     )
 
-    training_set = make_labelled_dataset(
+    training_set = make_model1_dataset(
         subjects_to_keep=training_subjects,
         **conf["data"]["train"],
     )
@@ -59,14 +59,12 @@ def train_model2(conf: dict):
 if __name__ == "__main__":
     # TODO: check balance
     if sys.argv[1] == "deep-learning":
-
         with open("model1.toml", "rb") as f:
             conf = tomli.load(f)
 
         train_model1(conf)
 
     elif sys.argv[1] == "non-deep-learning":
-
         with open("model2.toml", "rb") as f:
             conf = tomli.load(f)
 

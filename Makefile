@@ -19,17 +19,15 @@ $(venv): $(pip)
 
 ## create virtual environment and install requirements
 install: $(venv)
-	$(venv)/bin/pre-commit install
 
-install-hooks: .git/hooks/pre-commit
-
-## run pre-commit git hooks on all files
-hooks: install-hooks $(venv)
-	$(venv)/bin/pre-commit run --show-diff-on-failure --color=always --all-files --hook-stage push
 
 ## remove the virtual environment
 clean:
 	rm -rf $(venv)
+
+## format source code
+format:
+	$(venv)/bin/black src/
 
 ## download and unzip data
 download-data:

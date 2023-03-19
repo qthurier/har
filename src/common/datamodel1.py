@@ -35,13 +35,15 @@ def make_labelled_dataset(
     labels_file: str,
     subjects_file: str,
     batch_size: int,
-    seed: Optional[int]=None,
-    buffer_size: Optional[int]=None,
-    subjects_to_keep: Optional[list[int]]=None,
+    seed: Optional[int] = None,
+    buffer_size: Optional[int] = None,
+    subjects_to_keep: Optional[list[int]] = None,
     **kwargs: Any
 ):
     if seed and not buffer_size:
-        raise ValueError('The parameter buffer_size is required for shuffling the dataset.')
+        raise ValueError(
+            "The parameter buffer_size is required for shuffling the dataset."
+        )
 
     univariate_ts = _parse_folder(_parse_raw_ts_file, feat_folder)
     multivariate_ts = tf.data.Dataset.zip(univariate_ts).map(
@@ -68,8 +70,11 @@ def make_labelled_dataset(
 
 
 def get_labels(labelled_dataset: tf.data.Dataset) -> list[int]:
-    labels = labelled_dataset.flat_map(lambda *x: tf.data.Dataset.from_tensor_slices(x[-1])).as_numpy_iterator()
+    labels = labelled_dataset.flat_map(
+        lambda *x: tf.data.Dataset.from_tensor_slices(x[-1])
+    ).as_numpy_iterator()
     return list(labels)
+
 
 def get_subjects(file: str) -> set[int]:
     return set(int(s) for s in Path(file).read_text().split())

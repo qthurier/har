@@ -27,9 +27,7 @@ def _pretty_confusion_matrix(
 
 
 if __name__ == "__main__":
-
     if sys.argv[1] == "deep-learning":
-
         with open("model1.toml", "rb") as f:
             conf = tomli.load(f)
 
@@ -39,7 +37,6 @@ if __name__ == "__main__":
         y_hat = np.argmax(model.predict(test_set), axis=-1)
 
     elif sys.argv[1] == "non-deep-learning":
-
         with open("model2.toml", "rb") as f:
             conf = tomli.load(f)
 

@@ -1,9 +1,17 @@
 from typing import Any
 
 import tensorflow as tf
-from keras.layers import (GRU, Bidirectional, Concatenate, Conv1D, Dense,
-                          GlobalMaxPooling1D, Layer, LayerNormalization,
-                          Softmax)
+from keras.layers import (
+    GRU,
+    Bidirectional,
+    Concatenate,
+    Conv1D,
+    Dense,
+    GlobalMaxPooling1D,
+    Layer,
+    LayerNormalization,
+    Softmax,
+)
 from keras.models import Sequential
 
 # norm_inputs = Concatenate()([block1, block2, block3]) smooth decrease
