@@ -5,6 +5,8 @@ import tomli
 
 class DataModel1(tf.test.TestCase):
     def test_make_labelled_dataset_outputs_expected_shapes(self):
+        """Test the assignment requirement regarding batch shapes (ie must be batch size x sequence length x number of features)"""
+
         with open("model1.toml", "rb") as f:
             conf = tomli.load(f)
 

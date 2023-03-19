@@ -67,3 +67,5 @@ Model accuracy 91.45%
 (as you would communicate to a non-technical colleague. Include 1
 visualisation of your choice to illustrate the results.)
 
+![sitting/sitting vs sitting/standing](parallel_coordinates.png)
+

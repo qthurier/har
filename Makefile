@@ -53,6 +53,10 @@ eval-model1: $(venv) data model1
 eval-model2: $(venv) data model2
 	time $(venv)/bin/python src/evaluate.py non-deep-learning
 
+## plot error analysis visualisation
+plot: $(venv) data model1
+	time $(venv)/bin/python src/plot.py
+
 ## check activity classes distribution
 labels-distribution: data
 	cat "data/UCI HAR Dataset/train/y_train.txt" | sort | uniq -c
