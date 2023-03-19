@@ -19,6 +19,12 @@ On a MacBook Pro 2019 (2.6 GHz 6-Core Intel Core i7) it takes approximately:
 - 22 minutes to train the deep learning model
 - 14 minutes to train the non-deep machine learning model
 
+### <u>Restart from scratch</u>
+
+```bash
+make clean
+```
+
 ### <u>Get help</u>
 
 ```bash
