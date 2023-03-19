@@ -26,7 +26,7 @@ labels_desc_file = 'data/UCI HAR Dataset/activity_labels.txt'
 batch_size = 8
 
 [artefacts]
-model = 'keras_artefacts'
+model = 'model1'
 
 [training]
 max_epochs = 1

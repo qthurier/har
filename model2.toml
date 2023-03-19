@@ -22,7 +22,7 @@ headers_file = 'data/UCI HAR Dataset/features.txt'
 labels_desc_file = 'data/UCI HAR Dataset/activity_labels.txt'
 
 [artefacts]
-model = 'sklearn_artefacts/model.joblib'
+model = 'model2/model.joblib'
 
 [features]
 base = [

@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help install clean preprocess
+.PHONY: help install clean format eval-model1 eval-model2
 
 ## display help message
 help:
@@ -11,47 +11,44 @@ pip := $(venv)/bin/pip
 $(pip):
 	# create empty virtual environment containing pip
 	$(if $(value VIRTUAL_ENV),$(error Cannot create a virtual environment when running in a virtual environment. Please deactivate $(VIRTUAL_ENV)),)
-	python3 -m venv --clear $(venv)
+	python3.10 -m venv --clear $(venv)
 	$(pip) install --upgrade pip wheel
 
-$(venv): $(pip)
+## create virtual environment and install requirements
+install: $(pip)
 	$(pip) install -r requirements.txt
 
-## create virtual environment and install requirements
-install: $(venv)
-
-
-## remove the virtual environment
+## remove the project virtual environment and artefacts
 clean:
-	rm -rf $(venv)
+	rm -rf $(venv) data model1 model2
 
 ## format source code
-format:
+format: $(venv)
 	$(venv)/bin/black src/
 
 ## download and unzip data
-download-data:
+data:
 	rm -rf data
 	wget https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip -O uci.zip
 	unzip uci.zip -d data/
 	rm uci.zip
 
-## train
-train-dl-model: $(venv) data
-	rm -rf keras_artefacts
+## train deep learning model
+model1: $(venv) data
+	rm -rf model1
 	$(venv)/bin/python3 src/train.py deep-learning
 
-## train
-train-non-dl-model: $(venv) data
-	rm -rf sklearn_artefacts
-	mkdir sklearn_artefacts
-	$(venv)/bin/python3 src/train.py non-deep-learning
+## train non deep learning model
+model2: $(venv) data
+	rm -rf model2
+	mkdir model2
+	$(venv)/bin/python src/train.py non-deep-learning
 
-## evaluate
-evaluate-dl-model: $(venv) keras_artefacts
-	$(venv)/bin/python3 src/evaluate.py deep-learning
+## evaluate deep learning model
+eval-model1: $(venv) data model1
+	$(venv)/bin/python src/evaluate.py deep-learning
 
-## evaluate
-evaluate-non-dl-model: $(venv) sklearn_artefacts
-	$(venv)/bin/python3 src/evaluate.py non-deep-learning
+## evaluate non deep learning model
+eval-model2: $(venv) data model2
+	$(venv)/bin/python src/evaluate.py non-deep-learning
 
