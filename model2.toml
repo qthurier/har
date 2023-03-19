@@ -20,7 +20,7 @@ model = 'model2/model.joblib'
 
 [training]
 hyperparameter_grid = {classifier__n_estimators=[100, 200, 300, 400, 500]}
-n_folds = 3
+n_folds = 5
 metric = 'accuracy'
 max_iter = 1000
 seed = 123
@@ -162,7 +162,7 @@ base = [
 ]
 
 [features.time_domain_groups]
-tBodyAcc_trend = [
+tBodyAcc_location = [
     "1 tBodyAcc-mean()-X",
     "2 tBodyAcc-mean()-Y",
     "3 tBodyAcc-mean()-Z",
@@ -210,7 +210,7 @@ tBodyAcc_autocor = [
     "40 tBodyAcc-correlation()-Y,Z",
 ]
 
-tGravityAcc_trend = [
+tGravityAcc_location = [
     "41 tGravityAcc-mean()-X",
     "42 tGravityAcc-mean()-Y",
     "43 tGravityAcc-mean()-Z",
@@ -258,7 +258,7 @@ tGravityAcc_autocor = [
     "80 tGravityAcc-correlation()-Y,Z",
 ]
 
-tBodyAccJerk_trend = [
+tBodyAccJerk_location = [
     "81 tBodyAccJerk-mean()-X",
     "82 tBodyAccJerk-mean()-Y",
     "83 tBodyAccJerk-mean()-Z",
@@ -306,7 +306,7 @@ tBodyAccJerk_autocor = [
     "120 tBodyAccJerk-correlation()-Y,Z",
 ]
 
-tBodyGyro_trend = [
+tBodyGyro_location = [
     "121 tBodyGyro-mean()-X",
     "122 tBodyGyro-mean()-Y",
     "123 tBodyGyro-mean()-Z",
@@ -354,7 +354,7 @@ tBodyGyro_autocor = [
     "160 tBodyGyro-correlation()-Y,Z",
 ]
 
-tBodyGyroJerk_trend = [
+tBodyGyroJerk_location = [
     "161 tBodyGyroJerk-mean()-X",
     "162 tBodyGyroJerk-mean()-Y",
     "163 tBodyGyroJerk-mean()-Z",
@@ -404,7 +404,7 @@ tBodyGyroJerk_autocor = [
 
 [features.freq_domain_groups]
 
-fBodyAcc_trend = [
+fBodyAcc_location = [
     "266 fBodyAcc-mean()-X",
     "267 fBodyAcc-mean()-Y",
     "268 fBodyAcc-mean()-Z",
@@ -443,7 +443,7 @@ fBodyAcc_shape = [
     "302 fBodyAcc-kurtosis()-Z",
 ]
 
-fBodyAccJerk_trend = [
+fBodyAccJerk_location = [
     "345 fBodyAccJerk-mean()-X",
     "346 fBodyAccJerk-mean()-Y",
     "347 fBodyAccJerk-mean()-Z",
@@ -482,7 +482,7 @@ fBodyAccJerk_shape = [
     "381 fBodyAccJerk-kurtosis()-Z",
 ]
 
-fBodyGyro_trend = [
+fBodyGyro_location = [
     "424 fBodyGyro-mean()-X",
     "425 fBodyGyro-mean()-Y",
     "426 fBodyGyro-mean()-Z",
