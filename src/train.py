@@ -4,6 +4,9 @@ import sys
 import tomli
 import joblib
 from keras.callbacks import EarlyStopping
+import numpy as np
+from sklearn.feature_selection import SelectFromModel
+from sklearn.linear_model import LogisticRegression
 
 from common.datamodel1 import make_labelled_dataset as make_model1_dataset
 from common.datamodel1 import get_subjects
@@ -51,7 +54,14 @@ def train_model1(conf: dict):
 
 def train_model2(conf: dict):
     training_set = make_model2_dataset(**conf["data"]["train"])
-    classifier = RandomForestClassifier(conf["features"]["base"])
+    classifier = RandomForestClassifier(
+        base_features=conf["features"]["base"],
+        time_domain_groups=conf["features"]["time_domain_groups"],
+        freq_domain_groups=conf["features"]["freq_domain_groups"],
+        max_extra_feat=conf["Classifier"]["max_extra_feat"],
+        max_iter=conf["training"]["max_iter"],
+        seed=conf["training"]["seed"],
+    )
     classifier.fit(training_set, training_set.y)
     joblib.dump(classifier, conf["artefacts"]["model"])
 
