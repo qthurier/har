@@ -32,7 +32,7 @@ I haven't formally verified the presence of colinearity in this dataset, but giv
 |             | Deep learning model | Random Forest |
 | ----------- | ------------------- | ------------- |
 | Pros        | No feature engineering<br>Higher accuracy | Faster training<br>Better interpretability<br>Easier set up |
-| Cons        | Slower training<br>Higher accuracy | Heavy feature engineering |
+| Cons        | Slower training<br>Higher accuracy<br>Need validation set | Heavy feature engineering |
 
 ## Results
 (as you would communicate to a non-technical colleague. Include 1
