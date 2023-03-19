@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help install clean format eval-model1 eval-model2 labels-distribution
+.PHONY: help install clean format eval-model1 eval-model2 plot label-counts-test label-counts-train
 
 ## display help message
 help:
@@ -57,7 +57,11 @@ eval-model2: $(venv) data model2
 plot: $(venv) data model1
 	time $(venv)/bin/python src/plot.py
 
-## check activity classes distribution
-labels-distribution: data
+## check activity classes distribution in the test set
+label-counts-test: data
+	cat "data/UCI HAR Dataset/test/y_test.txt" | sort | uniq -c
+
+## check activity classes distribution in the training set
+label-counts-train: data
 	cat "data/UCI HAR Dataset/train/y_train.txt" | sort | uniq -c
 
