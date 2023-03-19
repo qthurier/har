@@ -19,6 +19,9 @@ labels_desc_file = 'data/UCI HAR Dataset/activity_labels.txt'
 model = 'model2/model.joblib'
 
 [training]
+hyperparameter_grid = {classifier__n_estimators=[100, 200, 300, 400, 500]}
+n_folds = 3
+metric = 'accuracy'
 max_iter = 1000
 seed = 123
 
