@@ -35,6 +35,35 @@ I haven't formally verified the presence of colinearity in this dataset, but giv
 | Cons        | Slower training<br>Higher accuracy<br>Need validation set | Heavy feature engineering |
 
 ## Results
+
+```make eval-model1```
+
+```
+Model accuracy 93.15%
+
+                      1 WALKING  2 WALKING_UPSTAIRS  3 WALKING_DOWNSTAIRS  4 SITTING  5 STANDING  6 LAYING
+1 WALKING                   463                   3                    29          1           0         0
+2 WALKING_UPSTAIRS            0                 444                    27          0           0         0
+3 WALKING_DOWNSTAIRS          4                   3                   413          0           0         0
+4 SITTING                     0                   2                     0        400          89         0
+5 STANDING                    0                   0                     0         19         513         0
+6 LAYING                      0                   0                     0          0          25       512
+```
+
+```make eval-model2```
+
+```
+Model accuracy 91.45%
+
+                      1 WALKING  2 WALKING_UPSTAIRS  3 WALKING_DOWNSTAIRS  4 SITTING  5 STANDING  6 LAYING
+1 WALKING                   485                   3                     8          0           0         0
+2 WALKING_UPSTAIRS           65                 398                     8          0           0         0
+3 WALKING_DOWNSTAIRS         25                  58                   337          0           0         0
+4 SITTING                     0                   0                     0        426          65         0
+5 STANDING                    0                   0                     0         20         512         0
+6 LAYING                      0                   0                     0          0           0       537
+```
+
 (as you would communicate to a non-technical colleague. Include 1
 visualisation of your choice to illustrate the results.)
 

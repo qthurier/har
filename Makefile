@@ -26,6 +26,10 @@ clean:
 format: $(venv)
 	$(venv)/bin/black src/
 
+## test source code
+test: $(venv) data
+	$(venv)/bin/pytest src/test.py -W ignore::DeprecationWarning
+
 ## download and unzip data
 data:
 	rm -rf data
