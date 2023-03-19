@@ -1,6 +1,10 @@
 [Classifier]
-feat_dim = 256
-kernel_size = 5
+n_feat = 9
+feat_block_size = 3
+encoder_dim = 64
+dense_dim = 32
+small_kernel_size = 5
+large_kernel_size = 50
 n_classes = 6
 
 [make_labelled_dataset]
@@ -26,5 +30,5 @@ subjects_file = 'data/UCI HAR Dataset/test/subject_test.txt'
 deep_learning_model = 'keras_artefacts'
 
 [training]
-max_epochs = 1
-patience = 5
+max_epochs = 50
+patience = 2

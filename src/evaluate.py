@@ -9,9 +9,10 @@ def main():
         conf = tomli.load(f)
 
     model = tf.keras.models.load_model(conf["artefacts"]["deep_learning_model"])
-    subjects = get_subjects(conf["data"]["test"]["subject_file"])
+    subjects = get_subjects(conf["data"]["test"]["subjects_file"])
     test_set = make_labelled_dataset(
-        subjects_to_keep=list(subjects) ** conf["data"]["test"],
+        subjects_to_keep=list(subjects),
+        **conf["data"]["test"],
         **conf["make_labelled_dataset"]
     )
 

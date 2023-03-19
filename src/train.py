@@ -38,6 +38,7 @@ def main():
     early_stopping = tf.keras.callbacks.EarlyStopping(
         monitor="loss", restore_best_weights=True, patience=conf["training"]["patience"]
     )
+    classifier.build((None, 128, 9))
     classifier.fit(
         training_set,
         validation_data=validation_set,

@@ -44,6 +44,6 @@ train: $(venv) data
 	$(venv)/bin/python3 src/train.py
 
 ## evaluate
-evaluate: $(venv) model
+evaluate: $(venv) keras_artefacts
 	$(venv)/bin/python3 src/evaluate.py
 
