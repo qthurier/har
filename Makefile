@@ -35,20 +35,19 @@ data:
 
 ## train deep learning model
 model1: $(venv) data
-	$(venv)/bin/python3 src/train.py deep-learning
+	time $(venv)/bin/python3 src/train.py deep-learning
 
 ## train non deep learning model
 model2: $(venv) data
-	mkdir model2
-	$(venv)/bin/python src/train.py non-deep-learning
+	time $(venv)/bin/python src/train.py non-deep-learning
 
 ## evaluate deep learning model
 eval-model1: $(venv) data model1
-	$(venv)/bin/python src/evaluate.py deep-learning
+	time $(venv)/bin/python src/evaluate.py deep-learning
 
 ## evaluate non deep learning model
 eval-model2: $(venv) data model2
-	$(venv)/bin/python src/evaluate.py non-deep-learning
+	time $(venv)/bin/python src/evaluate.py non-deep-learning
 
 ## check activity classes distribution
 labels-distribution: data

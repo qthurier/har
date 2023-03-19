@@ -6,7 +6,7 @@ import joblib
 from keras.callbacks import EarlyStopping
 import numpy as np
 from sklearn.model_selection import GridSearchCV
-
+from pathlib import Path
 from common.datamodel1 import make_labelled_dataset as make_model1_dataset
 from common.datamodel1 import get_subjects
 from common.datamodel2 import make_labelled_dataset as make_model2_dataset
@@ -62,15 +62,15 @@ def train_model2(conf: dict):
         seed=conf["training"]["seed"],
     )
     grid = conf["training"]["hyperparameter_grid"]
-    print(grid)
     best_classifier = GridSearchCV(
         classifier,
         grid,
-        conf["training"]["metric"],
+        scoring=conf["training"]["metric"],
         cv=conf["training"]["n_folds"],
         n_jobs=-1,
     )
     best_classifier.fit(training_set, training_set.y)
+    Path(conf["artefacts"]["model"]).parent.mkdir(parents=True)
     joblib.dump(best_classifier, conf["artefacts"]["model"])
 
 
