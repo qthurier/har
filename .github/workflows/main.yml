@@ -26,12 +26,8 @@ jobs:
       - name: Evaluate deep learning model
         id: evaluation
         run: |
-          make eval-model1
-      - name: Save results
-        env:
-          METRIC: ${{ steps.evaluation.outputs.stdout }}
-        run: |
-          echo $METRIC | grep "Model accuracy" > report/model1.txt
+          make eval-model1 | tee eval-model1.log
+          grep "Model" eval-model1.log > report/model1.txt
       - name: Include results as a PR comment
         uses: thollander/actions-comment-pull-request@v2
         with:
