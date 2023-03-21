@@ -24,3 +24,13 @@ jobs:
         run: |
           make model1
       - run: echo "💡 Model is trained."
+      - name: Evaluate deep learning model
+        id: evaluation
+        run: |
+          make eval-model1
+      - name: Save results
+        env:
+          METRIC: ${{ steps.evaluation.outputs.stdout }}
+        run: |
+          echo $METRIC > report/model1.txt
+      - run: echo "💡 Model results are available in 'report/model1.txt'."
