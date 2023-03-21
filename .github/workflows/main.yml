@@ -1,7 +1,11 @@
 name: Project CI pipeline
 run-name: ${{ github.actor }} is running the pipeline 🚀
 on: [pull_request]
-permissions: read-all|write-all
+permissions:
+  contents: read
+  metadata: read
+  packages: read
+  pull-requests: write
 jobs:
   Train-Deep-learning-model:
     runs-on: ubuntu-latest
