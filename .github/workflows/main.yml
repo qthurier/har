@@ -2,7 +2,7 @@ name: Project CI pipeline
 run-name: ${{ github.actor }} is running the pipeline 🚀
 on: [push]
 jobs:
-  Train Deep learning model
+  Train Deep learning model:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
