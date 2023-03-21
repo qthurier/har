@@ -91,7 +91,7 @@ For example these tables tell us that:
 
 Let's see whether feeding the deep learning model with additional features could help to fix this type of error:
 
-Here is a parallel coordinates plot that displays samples in the coordinate space. When the deep learning model classifies a SITTING subject as a STANDING subject the trajectory is blue, while when it correctly classifies a SITTING subject, the trajectory is green.
+Here is a parallel coordinates plot that displays samples in the coordinate space. When the deep learning model classifies a SITTING subject as a STANDING subject the trajectory is green, while when it correctly classifies a SITTING subject, the trajectory is turquoise.
 
 If there is any consistent differences between the two types of trajectories, then we can hypothesize that the corresponding features may help to improve the representation of the erroneous samples. This is because observing such differences boils down to identifying "a blind spot" for the model, given that it is unaware of the features in this plot since it has been trained on raw signals only.
 

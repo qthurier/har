@@ -38,7 +38,7 @@ def train_model1(conf: dict) -> None:
         metrics=conf["training"]["metric"],
     )
     early_stopping = EarlyStopping(
-        monitor="loss", restore_best_weights=True, patience=conf["training"]["patience"]
+        monitor="val_loss", restore_best_weights=True, patience=conf["training"]["patience"]
     )
     classifier.fit(
         training_set,

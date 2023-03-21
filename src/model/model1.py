@@ -40,7 +40,7 @@ class TimeWiseNormalisation(Layer):
             inputs, axis=-2, keepdims=True
         )  # do not squeeze to allow broadcasting
         sigma = tf.math.reduce_std(inputs, axis=-2, keepdims=True)
-        return inputs - mu / sigma
+        return (inputs - mu) / sigma
 
 
 class TimeAndFeatWiseNormalisation(Layer):
