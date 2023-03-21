@@ -3,7 +3,6 @@ run-name: ${{ github.actor }} is running the pipeline 🚀
 on: [pull_request]
 permissions:
   contents: read
-  metadata: read
   packages: read
   pull-requests: write
 jobs:
