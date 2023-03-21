@@ -1,4 +1,4 @@
-name: Project CI pipeline
+name: Model training CI pipeline
 run-name: ${{ github.actor }} is running the pipeline 🚀
 on: [pull_request]
 permissions:
