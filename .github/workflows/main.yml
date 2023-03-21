@@ -33,4 +33,9 @@ jobs:
           METRIC: ${{ steps.evaluation.outputs.stdout }}
         run: |
           echo $METRIC > report/model1.txt
-      - run: echo "💡 Model results are available in 'report/model1.txt'."
+      - run: echo "💡 Model results have been saved to a file."
+      - name: Include results as a PR comment
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: report/model1.txt
+          comment_tag: Model accuracy
