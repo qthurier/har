@@ -48,7 +48,7 @@ def main() -> None:
     plt.figure(figsize=(24, 6))
     plt.xticks(rotation=90, fontsize=7)
     plot = pd.plotting.parallel_coordinates(
-        df_to_plot, "case", color=("#4ECDC4", "#C7F464")
+        df_to_plot, "case", color=("#C7F464", "#4ECDC4")
     )
     plot.get_legend().remove()
     fig = plot.get_figure()
