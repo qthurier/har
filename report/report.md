@@ -56,15 +56,15 @@ For example, the deep learning model is correct 93 times out of 100:
 ```make eval-model1```
 
 ```
-Model accuracy 93.15%
+Model accuracy 93.62%
 
                       1 WALKING  2 WALKING_UPSTAIRS  3 WALKING_DOWNSTAIRS  4 SITTING  5 STANDING  6 LAYING
-1 WALKING                   463                   3                    29          1           0         0
-2 WALKING_UPSTAIRS            0                 444                    27          0           0         0
-3 WALKING_DOWNSTAIRS          4                   3                   413          0           0         0
-4 SITTING                     0                   2                     0        400          89         0
-5 STANDING                    0                   0                     0         19         513         0
-6 LAYING                      0                   0                     0          0          25       512
+1 WALKING                   457                  15                     0         24           0         0
+2 WALKING_UPSTAIRS            2                 443                     2         24           0         0
+3 WALKING_DOWNSTAIRS          0                   3                   411          6           0         0
+4 SITTING                     0                   3                     0        431          57         0
+5 STANDING                    0                   1                     0         49         482         0
+6 LAYING                      0                   0                     0          0           2       535
 ```
 
 While the non-deep machine learning model is correct 91 times out of 100:
